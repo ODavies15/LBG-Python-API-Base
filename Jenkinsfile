@@ -61,10 +61,8 @@ pipeline {
                 script {
 
                     // Deploy to GKE using Jenkins Kubernetes Engine Plugin
-                    // Deploy to GKE using Jenkins Kubernetes Engine Plugin
-
-                    step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'kubernetes/deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
-
+                    sh'gcloud config set account oli-jenkins@lbg-mea-15.iam.gserviceaccount.com'
+                    sh'kubectl apply -f kubernetes/deployment.yaml'
                 }
 
             }
