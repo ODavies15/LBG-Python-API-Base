@@ -16,7 +16,7 @@ pipeline {
 
         LOCATION = 'europe-west2-c'
 
-        CREDENTIALS_ID = 'somerubbish'
+        CREDENTIALS_ID = 'oli-jenkins-gke-sv'
 
     }
 
