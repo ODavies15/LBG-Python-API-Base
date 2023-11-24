@@ -16,7 +16,7 @@ pipeline {
 
         LOCATION = 'europe-west2-c'
 
-        CREDENTIALS_ID = 'oli-jenkins-gke-sv'
+        CREDENTIALS_ID = '3f817c18-0d27-4f6e-b7c1-aa6527a07ef1'
 
     }
 
@@ -61,12 +61,9 @@ pipeline {
                 script {
 
                     // Deploy to GKE using Jenkins Kubernetes Engine Plugin
-                    withCredentials([file(credentialsId: CREDENTIALS_ID, variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                    // Deploy to GKE using Jenkins Kubernetes Engine Plugin
 
-                        sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
-
-                    }
-                    sh 'kubectl apply -f kubernetes/deployment.yaml'
+                    step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'kubernetes/deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
 
                 }
 
