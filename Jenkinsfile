@@ -16,7 +16,7 @@ pipeline {
 
         LOCATION = 'europe-west2-c'
 
-        CREDENTIALS_ID = '21e75252-1810-46dc-9d93-23bcf6a1c867'
+        CREDENTIALS_ID = '9a11a7d8-740e-4047-942e-14e0a26350a1'
 
     }
 
