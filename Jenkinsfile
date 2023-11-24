@@ -61,8 +61,12 @@ pipeline {
                 script {
 
                     // Deploy to GKE using Jenkins Kubernetes Engine Plugin
+                    withCredentials([file(credentialsId: CREDENTIALS_ID, variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
 
-                    step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, location: env.LOCATION, manifestPattern: 'kubernetes/deployment.yaml', credentialsId: env.CREDENTIALS_ID, verifyDeployments: true])
+                        sh 'gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS'
+
+                    }
+                    sh 'kubectl apply -f kubernetes/deployment.yaml'
 
                 }
 
